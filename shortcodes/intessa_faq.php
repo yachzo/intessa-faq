@@ -11,13 +11,22 @@
  */
 
 
+function get_page_by_slug($page_slug, $output = OBJECT, $post_type = 'faq' ) { 
+  global $wpdb; 
+   $page = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_name = %s AND post_type= %s AND post_status = 'publish'", $page_slug, $post_type ) ); 
+     if ( $page ) 
+        return get_post($page, $output); 
+    return null; 
+  }
+
  function intessa_faq_shortcode($atts) {
 	
 	// First lets set some arguments for the query:
 	// Optionally, those could of course go directly into the query,
 	// especially, if you have no others but post type.
 	$args = array(
-	    'page_id' => 63,
+	    //'page_id' => 63,
+	    'page_id' => 111,
 	    'posts_per_page' => 1
 	    // Several more arguments could go here. Last one without a comma.
 	);
@@ -29,7 +38,7 @@
 	// Loop through the posts:
 	while ($faq_query->have_posts()) : $faq_query->the_post();
 	    // Echo some markup
-	    $html= '<ul class="vertical menu accordion-menu" data-accordion-menu >';
+	    $html= '<ul class="vertical menu accordion accordion-menu" data-accordion-menu >';
 	    
 	    // As with regular posts, you can use all normal display functions, such as
 	    //the_title();
@@ -49,7 +58,7 @@
     $question = esc_html( $entry['question'] );
     $answer = $entry['answer'];
 
-$html.= '<li>' . '<a href="#' . $i . 'a" >' .$question  . '</a>' . $answer;
+	$html.= '<li class="accordion-item">' . '<h3>' . $question  . '</h3><div class="accordion-item-content"><p>' . $answer . '</p></div>';
   
 	}
 	endwhile;

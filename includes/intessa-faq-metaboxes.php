@@ -67,7 +67,7 @@ function intessa_faq_register_repeatable_group_field_metabox() {
 		'id'           => $prefix . 'metabox',
 		'title'        => __( 'FAQ: Questions & Answers', 'cmb2' ),
 		'object_types' => array( 'page', ),
-		'show_on' => array( 'key' => 'id', 'value' => array( 63, ) ),
+		'show_on' => array( 'key' => 'id', 'value' => array( 111, ) ),
 		// Enables CMB2 REST API for this box, and determines which http methods the box is visible in.
 		'show_in_rest' => WP_REST_Server::ALLMETHODS, // or WP_REST_Server::ALLMETHODS/WP_REST_Server::EDITABLE,
 		'show_on_cb'   => 'is_gutenberg_enabled',
